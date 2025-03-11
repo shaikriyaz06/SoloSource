@@ -1,624 +1,432 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Button, Drawer } from "antd";
-import { CloseOutlined, MenuOutlined } from "@ant-design/icons";
-import Main_Logo from "../assets/Logo.jpg";
+import Main_Logo from "../assets/Hero-logo.png";
+import Main_Logo1 from "../assets/Hero-logo1.png";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [showSecondNavbar, setShowSecondNavbar] = useState(false); // state to control second navbar visibility
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [activeLink, setActiveLink] = useState("Home");
   const location = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (location.pathname === "/") {
-      setShowSecondNavbar(false);
-      setLastScrollY(0);
-    }
-  }, [location]);
+
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (
-        currentScrollY > 550 ||
-        (location.pathname !== "/" && currentScrollY > 200)
-      ) {
-        setShowSecondNavbar(true);
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
       } else {
-        setShowSecondNavbar(false);
+        setIsScrolled(false);
       }
-      if (currentScrollY > lastScrollY) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-      setLastScrollY(currentScrollY);
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY, location.pathname]);
-  const menuItems = [
-    { key: "/", label: "Home" },
-    { key: "/about", label: "About Us" },
-    { key: "/services", label: "Services" },
-    { key: "/contact", label: "Contact Us" },
-    { key: "/careers", label: "Careers" },
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setActiveLink("Home");
+    } else if (location.pathname === "/aboutus") {
+      setActiveLink("About Us");
+    } else if (location.pathname === "/contact") {
+      setActiveLink("Contact Us");
+    }
+  }, [location]);
+
+  const servicesMenu = {
+    "IT Consulting & Solution": [
+      {
+        name: "Digital Transformation",
+        description:
+          "Empower your business with cutting-edge digital solutions for growth and efficiency.",
+      },
+      {
+        name: "Cloud Solutions",
+        description:
+          "Leverage scalable and secure cloud technologies to drive innovation and agility.",
+      },
+      {
+        name: "Cyber Security",
+        description:
+          "Protect your digital assets with advanced security strategies and threat mitigation.",
+      },
+      {
+        name: "Software Development",
+        description:
+          "Develop custom software solutions to optimize workflows and enhance productivity.",
+      },
+      {
+        name: "AI & Data Analytics",
+        description:
+          "Gain actionable insights and drive smarter decisions with AI-driven analytics.",
+      },
+      {
+        name: "Enterprise Architecture",
+        description:
+          "Design a scalable and resilient IT architecture to support long-term business goals.",
+      },
+    ],
+    "Business Consulting": [
+      {
+        name: "Strategy & Operations",
+        description:
+          "Enhance business performance with data-driven strategies and process improvements.",
+      },
+      {
+        name: "Process Optimization",
+        description:
+          "Streamline operations and eliminate inefficiencies for maximum productivity.",
+      },
+      {
+        name: "Compliance Risk Management",
+        description:
+          "Ensure regulatory compliance and mitigate risks to safeguard business continuity.",
+      },
+    ],
+    "Tailored Talent Solutions": [
+      {
+        name: "IT & Business Staffing",
+        description:
+          "Connect with top-tier IT and business professionals to meet your staffing needs.",
+      },
+      {
+        name: "Contract & Permanent Hiring",
+        description:
+          "Flexible hiring solutions to help you scale your workforce efficiently.",
+      },
+      {
+        name: "Remote & On-Site Workforce",
+        description:
+          "Build a high-performing team with remote and on-site talent tailored to your needs.",
+      },
+    ],
+  };
+
+  const navLinks = [
+    {
+      title: "Home",
+      href: "/",
+    },
+    {
+      title: "About Us",
+      href: "/aboutus",
+    },
+    {
+      title: "Our Services",
+      isMegaMenu: true,
+    },
+    {
+      title: "Industries We Serve",
+      dropdown: [
+        { name: "Banking & Fintech", href: "#", icon: "🏦" },
+        { name: "IT & Technology", href: "#", icon: "💻" },
+        { name: "Entertainment & Media", href: "#", icon: "🎬" },
+        { name: "Health Care & Life Sciences", href: "#", icon: "⚕️" },
+        { name: "Logistic & Supply Chain", href: "#", icon: "🚛" },
+        { name: "Education & E-learning", href: "#", icon: "📚" },
+        { name: "Government & Public Sector", href: "#", icon: "🏛️" },
+      ],
+    },
+    {
+      title: "Careers",
+      dropdown: [
+        { name: "Job Openings", href: "#", icon: "🔍" },
+        { name: "Life at Solo Source", href: "#", icon: "🌟" },
+      ],
+    },
+    {
+      title: "Contact Us",
+      href: "/contact",
+    },
   ];
+
   return (
-    <>
-      <header className="fixed z-[99] top-0 left-0 w-full h-auto mt-0 mx-auto pt-[25px] pb-[25px] transition-all duration-300 ease-in-out">
-        <div className="container w-full max-w-[#1480px] mr-auto ml-auto">
-          <div className="wrapper pr-[20px] flex flex-row flex-wrap items-center justify-between static">
-            <div class="header-item-left flex basis-[18%] items-center">
-              {/* <a
-                href="https://www.valuecoders.com"
-                class="brand tehover:underline xt-[#212121]"
-              >
-                <div class="large transition-all duration-700 ease-in-out">
-                  <img
-                    class="light h-auto block"
-                    loading="lazy"
-                    src="https://www.valuecoders.com/wp-content/themes/valuecoders/dev-img/logo-valuecosers.svg"
-                    alt="Valuecoders"
-                    width="400"
-                    height="88"
-                  />
-                  <img
-                    class="dark hidden"
-                    loading="lazy"
-                    src="https://www.valuecoders.com/wp-content/themes/valuecoders/dev-img/logo-valucoders-light.svg"
-                    alt="Valuecoders"
-                    width="400"
-                    height="88"
-                  />
-                </div>
-                <div class="small opacity-0 grid bg-[#ececec] p-[10px] w-[60px] h-[60px] border-r-[50%] items-center absolute top-[10px] transition-all duration-700 ease-in-out  ">
-                  <img
-                    loading="lazy"
-                    src="https://www.valuecoders.com/wp-content/themes/valuecoders/v4.0/header-images/logo-small.svg"
-                    alt="Valuecoders"
-                    width="80"
-                    height="80"
-                  />
-                </div>
-              </a> */}
-              {/* <div class="small opacity-0 grid bg-[#ececec] p-[10px] w-[60px] h-[60px] border-r-[50%] items-center absolute top-[10px] transition-all duration-700 ease-in-out  "> */}
-              {/* <img
-                  loading="lazy"
-                  src={Main_Logo}
-                  alt="Valuecoders"
-                  width="100"
-                  height="100"
-                /> */}
-              {/* </div> */}
-              {/* <h1 className="text-3xl text-white">Solo Source</h1> */}
+    <header
+      className={`fixed w-full z-50 transition-all duration-500 ease-in-out ${
+        isScrolled ? "bg-white shadow-lg backdrop-blur-sm" : "bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <div className="flex-shrink-0 w-[150px] transition-transform duration-300 hover:scale-105">
+            <Link to="/" onClick={() => setActiveLink("Home")}>
               <img
-                // loading="lazy"
-                src={Main_Logo}
-                alt="Valuecoders"
-                width="170"
-                height="80"
+                src={isScrolled ? Main_Logo : Main_Logo1}
+                alt="Logo"
+                className="h-14 w-28"
               />
-              <div class="hamberger-menu">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
-              </div>
-            </div>
-            <div class="header-item-right flex basis-[80%] items-center justify-center">
-              {/* <nav>
-                <ul>
-                  <li className="menu-item-has-children hover:border-b-2 border-yellow-400  inline-block transition-all duration-300 ease-in-out">
-                    <a
-                      href="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-                      class="linkhover:underline  relative no-underline text-[16px] leading-5 pt-0 pr-[10px] pb-[35px] pl-[10px] border-none outline-none text-white font-semibold"
-                    >
-                      About Us
-                    </a>
-                  </li>
-                  <li className="menu-item-has-children hover:border-b-2 border-yellow-400  inline-block transition-all duration-300 ease-in-out">
-                    <a
-                      href="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-                      class="linkhover:underline  relative no-underline text-[16px] leading-5 pt-0 pr-[10px] pb-[35px] pl-[10px] border-none outline-none text-white font-semibold"
-                    >
-                      About Us
-                    </a>
-                  </li>
-                  <li className="menu-item-has-children hover:border-b-2 border-yellow-400  inline-block transition-all duration-300 ease-in-out">
-                    <a
-                      href="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-                      class="linkhover:underline  relative no-underline text-[16px] leading-5 pt-0 pr-[10px] pb-[35px] pl-[10px] border-none outline-none text-white font-semibold"
-                    >
-                      About Us
-                    </a>
-                  </li>
-                  <li className="menu-item-has-children hover:border-b-2 border-yellow-400  inline-block transition-all duration-300 ease-in-out">
-                    <a
-                      href="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-                      class="linkhover:underline  relative no-underline text-[16px] leading-5 pt-0 pr-[10px] pb-[35px] pl-[10px] border-none outline-none text-white font-semibold"
-                    >
-                      About Us
-                    </a>
-                  </li>
-                  <li className="menu-item-has-children hover:border-b-2 border-yellow-400  inline-block transition-all duration-300 ease-in-out">
-                    <a
-                      href="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-                      class="linkhover:underline  relative no-underline text-[16px] leading-5 pt-0 pr-[10px] pb-[35px] pl-[10px] border-none outline-none text-white font-semibold"
-                    >
-                      About Us
-                    </a>
-                  </li>
-                  <li className="menu-item-has-children hover:border-b-2 border-yellow-400  inline-block transition-all duration-300 ease-in-out">
-                    <a
-                      href="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-                      class="linkhover:underline  relative no-underline text-[16px] leading-5 pt-0 pr-[10px] pb-[35px] pl-[10px] border-none outline-none text-white font-semibold"
-                    >
-                      About Us
-                    </a>
-                  </li>
-                </ul>
-              </nav> */}
-              <div className="relative container mx-auto">
-                {/* Your nav goes here */}
-                <nav className="relative">
-                  <ul className="flex space-x-4">
-                    <li className="menu-item-has-children hover:border-b-2 border-yellow-400  inline-block transition-all duration-300 ease-in-out group">
-                      <a
-                        href="#"
-                        className=" link relative no-underline text-[16px] leading-5 pt-0 pr-[10px] pb-[35px] pl-[10px] border-none outline-none text-white font-semibold"
-                      >
-                        About us
-                      </a>
-                      <div className="absolute hidden group-hover:block left-1/2 transform -translate-x-1/2 w-[1480px] bg-white shadow-lg rounded-lg mt-1">
-                        <div className="flex">
-                          <div className="w-1/4 bg-gray-50 p-4 min-h-[400px]">
-                            <ul>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Our Mission & vision
-                                </a>
-                              </li>
-
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Our Leadership team
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Why Choose Solo Source?
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Location & Presence (Saudi Arabia & Bahrain)
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="menu-item-has-children hover:border-b-2 border-yellow-400  inline-block transition-all duration-300 ease-in-out group">
-                      <a
-                        href="#"
-                        className=" link relative no-underline text-[16px] leading-5 pt-0 pr-[10px] pb-[35px] pl-[10px] border-none outline-none text-white font-semibold"
-                      >
-                        Our Services
-                      </a>
-                      <div className="absolute hidden group-hover:block left-1/2 transform -translate-x-1/2 w-[1480px] bg-white shadow-lg rounded-lg mt-1">
-                        <div className="flex">
-                          <div className="w-1/4 bg-gray-50 p-4 min-h-[400px]">
-                            <ul>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  IT Consulting & Solution
-                                </a>
-                                {/* Right Side Content for Web Development */}
-                                <div className="absolute left-1/4 top-0 w-3/4 h-full hidden group-hover/item:block p-6">
-                                  <div className="grid grid-cols-3 gap-6">
-                                    <div>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Digital Transformation
-                                      </h3>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Cloud Solutions
-                                      </h3>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Cybersecurity
-                                      </h3>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Software Development
-                                      </h3>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        AI & Data Analytics
-                                      </h3>
-                                      {/* <ul>
-                                        <li className="mb-3">
-                                          <a
-                                            href="#"
-                                            className="hover:underline text-gray-600 hover:text-blue-600"
-                                          >
-                                            React.js
-                                          </a>
-                                        </li>
-                                        <li className="mb-3">
-                                          <a
-                                            href="#"
-                                            className="hover:underline text-gray-600 hover:text-blue-600"
-                                          >
-                                            Angular
-                                          </a>
-                                        </li>
-                                        <li className="mb-3">
-                                          <a
-                                            href="#"
-                                            className="hover:underline text-gray-600 hover:text-blue-600"
-                                          >
-                                            Vue.js
-                                          </a>
-                                        </li>
-                                      </ul> */}
-                                    </div>
-                                    {/* <div>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Backend
-                                      </h3>
-                                      <ul>
-                                        <li className="mb-3">
-                                          <a
-                                            href="#"
-                                            className="hover:underline text-gray-600 hover:text-blue-600"
-                                          >
-                                            Node.js
-                                          </a>
-                                        </li>
-                                        <li className="mb-3">
-                                          <a
-                                            href="#"
-                                            className="hover:underline text-gray-600 hover:text-blue-600"
-                                          >
-                                            Python
-                                          </a>
-                                        </li>
-                                        <li className="mb-3">
-                                          <a
-                                            href="#"
-                                            className="hover:underline text-gray-600 hover:text-blue-600"
-                                          >
-                                            Java
-                                          </a>
-                                        </li>
-                                      </ul>
-                                    </div> */}
-                                    {/* <div>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Database
-                                      </h3>
-                                      <ul>
-                                        <li className="mb-3">
-                                          <a
-                                            href="#"
-                                            className="hover:underline text-gray-600 hover:text-blue-600"
-                                          >
-                                            MongoDB
-                                          </a>
-                                        </li>
-                                        <li className="mb-3">
-                                          <a
-                                            href="#"
-                                            className="hover:underline text-gray-600 hover:text-blue-600"
-                                          >
-                                            MySQL
-                                          </a>
-                                        </li>
-                                        <li className="mb-3">
-                                          <a
-                                            href="#"
-                                            className="hover:underline text-gray-600 hover:text-blue-600"
-                                          >
-                                            PostgreSQL
-                                          </a>
-                                        </li>
-                                      </ul>
-                                    </div> */}
-                                  </div>
-                                </div>
-                              </li>
-
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Business Consulting
-                                </a>
-                                {/* Right Side Content for Web Development */}
-                                <div className="absolute left-1/4 top-0 w-3/4 h-full hidden group-hover/item:block p-6">
-                                  <div className="grid grid-cols-3 gap-6">
-                                    <div>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Strategy & Operation
-                                      </h3>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Process Optimization
-                                      </h3>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Compliance & Risk Management
-                                      </h3>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Tailored Talent Solutions
-                                </a>
-                                {/* Right Side Content for Web Development */}
-                                <div className="absolute left-1/4 top-0 w-3/4 h-full hidden group-hover/item:block p-6">
-                                  <div className="grid grid-cols-3 gap-6">
-                                    <div>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        IT & Business Staffing
-                                      </h3>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Contract & Permanent Hiring
-                                      </h3>
-                                      <h3 className="text-lg font-bold text-gray-800 mb-4">
-                                        Remote & On-Site Workforce
-                                      </h3>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li className="menu-item-has-children hover:border-b-2 border-yellow-400  inline-block transition-all duration-300 ease-in-out group">
-                      <a
-                        href="#"
-                        className=" link relative no-underline text-[16px] leading-5 pt-0 pr-[10px] pb-[35px] pl-[10px] border-none outline-none text-white font-semibold"
-                      >
-                        Industries We Serve
-                      </a>
-                      <div className="absolute hidden group-hover:block left-1/2 transform -translate-x-1/2 w-[1480px] bg-white shadow-lg rounded-lg mt-1">
-                        <div className="flex">
-                          <div className="w-1/4 bg-gray-50 p-4 min-h-[400px]">
-                            <ul>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Banking & FinTech
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  IT & Technology
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Entertainment & Media
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Government & Public Sector
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Health Care & Life Sciences
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Logistics & Supply Chain
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Education & E-Learning
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="menu-item-has-children hover:border-b-2 border-yellow-400  inline-block transition-all duration-300 ease-in-out group">
-                      <a
-                        href="#"
-                        className=" link relative no-underline text-[16px] leading-5 pt-0 pr-[10px] pb-[35px] pl-[10px] border-none outline-none text-white font-semibold"
-                      >
-                        Careers
-                      </a>
-                      <div className="absolute hidden group-hover:block left-1/2 transform -translate-x-1/2 w-[1480px] bg-white shadow-lg rounded-lg mt-1">
-                        <div className="flex">
-                          <div className="w-1/4 bg-gray-50 p-4 min-h-[400px]">
-                            <ul>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Life at Solo Source
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Job Openings
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Apply Now
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="menu-item-has-children hover:border-b-2 border-yellow-400  inline-block transition-all duration-300 ease-in-out group">
-                      <a
-                        href="#"
-                        className=" link relative no-underline text-[16px] leading-5 pt-0 pr-[10px] pb-[35px] pl-[10px] border-none outline-none text-white font-semibold"
-                      >
-                        Contact Us
-                      </a>
-                      <div className="absolute hidden group-hover:block left-1/2 transform -translate-x-1/2 w-[1480px] bg-white shadow-lg rounded-lg mt-1">
-                        <div className="flex">
-                          <div className="w-1/4 bg-gray-50 p-4 min-h-[400px]">
-                            <ul>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Inquiry Form
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Office Location & Contact Details
-                                </a>
-                              </li>
-                              <li className="group/item">
-                                <a
-                                  href="#"
-                                  className="hover:underline block px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 font-medium rounded-md group-hover/item:bg-blue-50"
-                                >
-                                  Apply Now
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <nav>
-        <div className="max-w-7xl  ml-4 mx-auto sm:px-6 lg:px-8">
-          <div className="flex justify-start items-center h-20">
-            <Link to="/" className="flex items-center space-x-3">
-              <h1 className="text-white text-4xl">LOGO</h1>
             </Link>
-            <div className="hidden lg:flex items-center space-x-8 ml-8">
-              {menuItems.map((item) => (
-                <Link
-                  key={item.key}
-                  to={item.key}
-                  className={`text-base font-medium relative inline-block py-2 rounded-md ${
-                    location.pathname === item.key
-                      ? "text-white"
-                      : "text-white group hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                  <span
-                    className={`custom-link absolute bottom-0 left-0 block h-[2px] bg-white transition-all duration-300 ${
-                      location.pathname === item.key
-                        ? "w-full"
-                        : "w-0 group-hover:w-full"
-                    }`}
-                  />
-                </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex flex-1 justify-center">
+            <ul className="flex space-x-10">
+              {navLinks.map((link, index) => (
+                <li key={index} className="relative group">
+                  <Link
+                    to={link.href || "#"}
+                    className={`inline-flex items-center text-base font-medium transition-all duration-300 py-2
+        ${
+          activeLink === link.title
+            ? "border-yellow-400 text-yellow-400"
+            : "border-transparent border-b-2 hover:border-yellow-400"
+        } 
+        ${isScrolled ? "text-gray-800" : "text-white"}
+        hover:text-yellow-400
+        group-hover:text-yellow-400 group-hover:border-yellow-400`}
+                    onClick={() => setActiveLink(link.title)}
+                    onMouseEnter={() => {
+                      if (link.isMegaMenu) {
+                        setActiveCategory(Object.keys(servicesMenu)[0]);
+                      }
+                    }}
+                  >
+                    {link.title}
+                    {(link.dropdown || link.isMegaMenu) && (
+                      <svg
+                        className="w-4 h-4 ml-1 transition-transform duration-300 group-hover:rotate-180"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    )}
+                  </Link>
+
+                  {/* Regular Dropdown */}
+                  {link.dropdown && (
+                    <div
+                      className="absolute left-1/2 -translate-x-1/2 mt-2 w-60 opacity-0 invisible 
+        group-hover:opacity-100 group-hover:visible 
+        transition-all duration-300 transform translate-y-2 group-hover:translate-y-0"
+                    >
+                      <div className="py-2 px-2 bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5">
+                        {link.dropdown.map((item, itemIndex) => (
+                          <a
+                            key={itemIndex}
+                            href={item.href}
+                            className="flex items-center space-x-3 px-4 py-3 text-sm text-gray-700 
+                hover:bg-gray-50 hover:text-yellow-400 rounded-md transition-colors duration-200"
+                          >
+                            <span className="text-lg">{item.icon}</span>
+                            <span>{item.name}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Mega Menu */}
+                  {link.isMegaMenu && (
+                    <div
+                      className="absolute left-1/2 -translate-x-1/2 mt-2 w-[1000px] h-[400px] 
+        opacity-0 invisible group-hover:opacity-100 group-hover:visible 
+        transition-all duration-300 transform translate-y-2 group-hover:translate-y-0"
+                    >
+                      {/* Add hover gap div */}
+                      <div className="absolute h-[20px] w-full -top-[20px]"></div>
+                      <div className="bg-white rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 p-6 h-full">
+                        <div className="flex h-full">
+                          {/* Categories */}
+                          <div className="w-[250px] border-r border-gray-200 h-full overflow-y-auto">
+                            {Object.keys(servicesMenu).map((category) => (
+                              <div
+                                key={category}
+                                className={`px-4 py-3 cursor-pointer text-sm font-medium rounded-md transition-all duration-200 group/item flex items-center justify-between ${
+                                  activeCategory === category
+                                    ? "bg-yellow-50 text-yellow-600"
+                                    : "text-gray-600 hover:bg-gray-50 hover:text-yellow-600"
+                                }`}
+                                onMouseEnter={() => setActiveCategory(category)}
+                              >
+                                <span>{category}</span>
+                                <span
+                                  className={`transform transition-all duration-200 ${
+                                    activeCategory === category
+                                      ? "opacity-100 translate-x-0"
+                                      : "opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0"
+                                  }`}
+                                >
+                                  <svg
+                                    className="w-5 h-5"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth={2}
+                                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                                    />
+                                  </svg>
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Sublinks */}
+                          <div className="flex-1 pl-6 h-full overflow-y-auto">
+                            {activeCategory && (
+                              <div
+                                className={`grid ${
+                                  activeCategory === "IT Consulting"
+                                    ? "grid-cols-3"
+                                    : "grid-cols-2"
+                                } gap-4 auto-rows-min`}
+                              >
+                                {servicesMenu[activeCategory].map((service) => (
+                                  <a
+                                    key={service.name}
+                                    href="#"
+                                    className="group p-4 rounded-lg hover:bg-gray-50 transition-all duration-200 border border-gray-100 hover:border-gray-200"
+                                  >
+                                    <div className="font-medium text-gray-900 group-hover:text-yellow-600">
+                                      {service.name}
+                                    </div>
+                                    <p className="mt-2 text-sm text-gray-500 line-clamp-2">
+                                      {service.description}
+                                    </p>
+                                  </a>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </li>
               ))}
-            </div>
+            </ul>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-200 ${
+                isScrolled ? "text-gray-800" : "text-white"
+              } hover:text-yellow-400 focus:outline-none`}
+            >
+              {isMobileMenuOpen ? (
+                <svg
+                  className="h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
+            </button>
           </div>
         </div>
-      </nav> */}
-        {/* <Drawer
-        title="Menu"
-        placement="right"
-        onClose={() => setIsMenuOpen(false)}
-        open={isMenuOpen}
-        className="lg:hidden !bg-black text-white"
-        closeIcon={<CloseOutlined className="!text-white" />}
+      </div>
+
+      {/* Mobile Menu */}
+      <div
+        className={`${
+          isMobileMenuOpen ? "block" : "hidden"
+        } lg:hidden bg-white shadow-lg`}
       >
-        <div className="flex flex-col space-y-4">
-          {menuItems.map((item) => (
-            <Link
-              key={item.key}
-              to={item.key}
-              onClick={() => setIsMenuOpen(false)}
-              className={`text-base font-medium relative inline-block py-2 rounded-md ${
-                location.pathname === item.key
-                  ? "text-blue-500 font-bold  underline"
-                  : "text-white hover:text-black"
-              }`}
-            >
-              {item.label}
-              <span
-                className={`absolute bottom-0 left-0 block h-[2px] bg-black transition-all duration-300 ${
-                  location.pathname === item.key
-                    ? "w-full"
-                    : "w-0 group-hover:w-full"
-                }`}
-              />
-            </Link>
+        <div className="px-4 pt-2 pb-3 space-y-1">
+          {navLinks.map((link, index) => (
+            <div key={index} className="relative">
+              {link.isMegaMenu ? (
+                <div className="py-2">
+                  <div className="px-3 py-2 text-base font-medium text-gray-900">
+                    Services
+                  </div>
+                  <div className="space-y-4 mt-2">
+                    {Object.entries(servicesMenu).map(
+                      ([category, services]) => (
+                        <div key={category} className="px-3">
+                          <div className="text-sm font-semibold text-gray-900 mb-2">
+                            {category}
+                          </div>
+                          <div className="space-y-2">
+                            {services.map((service) => (
+                              <a
+                                key={service.name}
+                                href="#"
+                                className="block px-3 py-2 text-sm text-gray-600 hover:text-yellow-600 hover:bg-yellow-50 rounded-md"
+                              >
+                                {service.name}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="py-2">
+                  <Link
+                    to={link.href || "#"}
+                    className={`block px-3 py-2 text-base font-medium ${
+                      activeLink === link.title
+                        ? "text-yellow-600 bg-yellow-50"
+                        : "text-gray-900 hover:text-yellow-600"
+                    }`}
+                    onClick={() => {
+                      setActiveLink(link.title);
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    {link.title}
+                  </Link>
+                  {link.dropdown && (
+                    <div className="mt-2 space-y-2">
+                      {link.dropdown.map((item, itemIndex) => (
+                        <a
+                          key={itemIndex}
+                          href={item.href}
+                          className="flex items-center space-x-3 px-6 py-2 text-sm text-gray-600 hover:text-yellow-600 hover:bg-yellow-50"
+                        >
+                          <span className="text-lg">{item.icon}</span>
+                          <span>{item.name}</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           ))}
         </div>
-      </Drawer> */}
-      </header>
-    </>
+      </div>
+    </header>
   );
 };
 

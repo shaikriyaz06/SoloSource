@@ -10,6 +10,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect, useState } from "react";
 import { Input, Button, Spin, Form } from "antd"; // Antd components
+import AboutUs from "./components/AboutUs";
+import Footer from "./components/Footer";
+import ContactUS from "./components/Contactus";
 
 function App() {
   const [form] = Form.useForm();
@@ -50,9 +53,13 @@ function App() {
   return (
     <div>
       <Navbar />
+
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route exact path="/aboutus" element={<AboutUs />} />
+        <Route exact path="/contact" element={<ContactUS />} />
       </Routes>
+      <Footer />
       {/* <div
         className="fixed z-50 bottom-4 right-4 bg-blue-500 text-white rounded-full p-4 shadow-lg hover:bg-blue-600 cursor-pointer"
         onClick={togglePopup}
@@ -194,6 +201,7 @@ function App() {
           </div>
         </div>
       )} */}
+
       <ToastContainer />
     </div>
   );
