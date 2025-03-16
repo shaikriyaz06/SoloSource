@@ -237,19 +237,16 @@ const Navbar = () => {
                   <Link
                     to={link.href || "#"}
                     className={`inline-flex items-center text-base font-medium transition-all duration-300 py-2
-        ${
-          activeLink === link.title
-            ? "border-yellow-400 text-blue-700 bg-white px-4 rounded-sm"
-            : "border-transparent border-b-2 hover:border-yellow-400"
-        } 
-        ${isScrolled ? "text-gray-800" : "text-white"}
-        ${
-          isScrolled && activeLink === link.title
-            ? `!text-white !bg-teal-950`
-            : ""
-        }
-        hover:text-yellow-400
-        group-hover:text-yellow-400 group-hover:border-yellow-400`}
+                      ${
+                        activeLink === link.title
+                          ? isScrolled
+                            ? "bg-teal-950 text-white p-2 rounded-sm"
+                            : "bg-white !text-blue-700 border-yellow-400 p-2 rounded-sm"
+                          : "border-transparent border-b-2 hover:border-yellow-400"
+                      }
+                      ${isScrolled ? "text-gray-800" : "text-white"}
+                      hover:text-yellow-400 group-hover:text-yellow-400 group-hover:border-yellow-400
+                    `}
                     onClick={() => setActiveLink(link.title)}
                     onMouseEnter={() => {
                       if (link.isMegaMenu) {
