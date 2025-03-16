@@ -7,9 +7,13 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("Home");
   const location = useLocation();
-
+  const handleNavigation = () => {
+    setActiveCategory(null);
+    setIsMenuOpen(false);
+  };
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -19,8 +23,38 @@ const Navbar = () => {
       }
     };
 
+    // Smooth scroll function
+    const smoothScroll = (e) => {
+      e.preventDefault();
+      const targetId = e.currentTarget.getAttribute("href");
+      if (targetId && targetId.startsWith("#")) {
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+            inline: "nearest",
+          });
+        }
+      }
+    };
+
+    // Add event listeners
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Add smooth scroll to all anchor links
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+    anchorLinks.forEach((link) => {
+      link.addEventListener("click", smoothScroll);
+    });
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      anchorLinks.forEach((link) => {
+        link.removeEventListener("click", smoothScroll);
+      });
+    };
   }, []);
 
   useEffect(() => {
@@ -30,6 +64,8 @@ const Navbar = () => {
       setActiveLink("About Us");
     } else if (location.pathname === "/contact") {
       setActiveLink("Contact Us");
+    } else if (location.pathname.startsWith("/services")) {
+      setActiveLink("Our Services");
     }
   }, [location]);
 
@@ -37,31 +73,37 @@ const Navbar = () => {
     "IT Consulting & Solution": [
       {
         name: "Digital Transformation",
+        link: "/services/ItConsultings#digitalTransformation",
         description:
           "Empower your business with cutting-edge digital solutions for growth and efficiency.",
       },
       {
         name: "Cloud Solutions",
+        link: "/services/ItConsultings#cloudSolutions",
         description:
           "Leverage scalable and secure cloud technologies to drive innovation and agility.",
       },
       {
         name: "Cyber Security",
+        link: "/services/ItConsultings#cyberSecurity",
         description:
           "Protect your digital assets with advanced security strategies and threat mitigation.",
       },
       {
         name: "Software Development",
+        link: "/services/ItConsultings#softwareDevelopment",
         description:
           "Develop custom software solutions to optimize workflows and enhance productivity.",
       },
       {
         name: "AI & Data Analytics",
+        link: "/services/ItConsultings#ai",
         description:
           "Gain actionable insights and drive smarter decisions with AI-driven analytics.",
       },
       {
         name: "Enterprise Architecture",
+        link: "/services/ItConsultings#enterpriseArchitecture",
         description:
           "Design a scalable and resilient IT architecture to support long-term business goals.",
       },
@@ -69,16 +111,19 @@ const Navbar = () => {
     "Business Consulting": [
       {
         name: "Strategy & Operations",
+        link: "/services/BusinessConsulting#strategyandoperations",
         description:
           "Enhance business performance with data-driven strategies and process improvements.",
       },
       {
         name: "Process Optimization",
+        link: "/services/BusinessConsulting#processoptimization",
         description:
           "Streamline operations and eliminate inefficiencies for maximum productivity.",
       },
       {
         name: "Compliance Risk Management",
+        link: "/services/BusinessConsulting#riskManagement",
         description:
           "Ensure regulatory compliance and mitigate risks to safeguard business continuity.",
       },
@@ -86,6 +131,7 @@ const Navbar = () => {
     "Tailored Talent Solutions": [
       {
         name: "IT & Business Staffing",
+        link: "/services/TailoredTalent",
         description:
           "Connect with top-tier IT and business professionals to meet your staffing needs.",
       },
@@ -118,13 +164,37 @@ const Navbar = () => {
     {
       title: "Industries We Serve",
       dropdown: [
-        { name: "Banking & Fintech", href: "#", icon: "🏦" },
-        { name: "IT & Technology", href: "#", icon: "💻" },
-        { name: "Entertainment & Media", href: "#", icon: "🎬" },
-        { name: "Health Care & Life Sciences", href: "#", icon: "⚕️" },
-        { name: "Logistic & Supply Chain", href: "#", icon: "🚛" },
-        { name: "Education & E-learning", href: "#", icon: "📚" },
-        { name: "Government & Public Sector", href: "#", icon: "🏛️" },
+        { name: "Banking & Fintech", href: "/industries/banking", icon: "🏦" },
+        {
+          name: "Information Technology & TMT",
+          href: "/industries/it",
+          icon: "💻",
+        },
+        {
+          name: "Digital Entertainment",
+          href: "/industries/digital",
+          icon: "🎬",
+        },
+        {
+          name: "Health Care & Life Sciences",
+          href: "/industries/healthcare",
+          icon: "⚕️",
+        },
+        {
+          name: "Logistic & Supply Chain",
+          href: "/industries/logistics",
+          icon: "🚛",
+        },
+        {
+          name: "Education & E-learning",
+          href: "/industries/education",
+          icon: "📚",
+        },
+        {
+          name: "Government & Public Sector",
+          href: "/industries/government",
+          icon: "🏛️",
+        },
       ],
     },
     {
@@ -169,10 +239,15 @@ const Navbar = () => {
                     className={`inline-flex items-center text-base font-medium transition-all duration-300 py-2
         ${
           activeLink === link.title
-            ? "border-yellow-400 text-yellow-400"
+            ? "border-yellow-400 text-blue-700 bg-white px-4 rounded-sm"
             : "border-transparent border-b-2 hover:border-yellow-400"
         } 
         ${isScrolled ? "text-gray-800" : "text-white"}
+        ${
+          isScrolled && activeLink === link.title
+            ? `!text-white !bg-teal-950`
+            : ""
+        }
         hover:text-yellow-400
         group-hover:text-yellow-400 group-hover:border-yellow-400`}
                     onClick={() => setActiveLink(link.title)}
@@ -286,7 +361,7 @@ const Navbar = () => {
                                 {servicesMenu[activeCategory].map((service) => (
                                   <a
                                     key={service.name}
-                                    href="#"
+                                    href={service.link}
                                     className="group p-4 rounded-lg hover:bg-gray-50 transition-all duration-200 border border-gray-100 hover:border-gray-200"
                                   >
                                     <div className="font-medium text-gray-900 group-hover:text-yellow-600">

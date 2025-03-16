@@ -1,17 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Main_Logo from "../assets/Hero-logo1.png";
 
 export default function Footer() {
   return (
     <div>
-      <footer className="bg-gray-900 text-gray-300 p-10">
+      <hr />
+      <footer className="bg-gray-900 text-gray-300 p-10" data-aos="fade-up">
         {/* Main Footer */}
         <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* Company Info */}
             <div>
               <h3 className="text-white text-lg font-semibold mb-4">
-                About Company
+                <img src={Main_Logo} alt="Logo" className="h-14 w-28" />
               </h3>
               <p className="mb-4">
                 We are dedicated to providing innovative software solutions and
@@ -76,18 +78,18 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    to="/services"
+                    to="/portfolio"
                     className="hover:text-white transition-colors duration-300"
                   >
-                    Services
+                    Industries
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to="/portfolio"
+                    to="/contact"
                     className="hover:text-white transition-colors duration-300"
                   >
-                    Portfolio
+                    Careers
                   </Link>
                 </li>
                 <li>
@@ -112,7 +114,7 @@ export default function Footer() {
                     to="/web-development"
                     className="hover:text-white transition-colors duration-300"
                   >
-                    Web Development
+                    IT Consulting
                   </Link>
                 </li>
                 <li>
@@ -120,7 +122,7 @@ export default function Footer() {
                     to="/mobile-development"
                     className="hover:text-white transition-colors duration-300"
                   >
-                    Mobile Development
+                    Business Consulting
                   </Link>
                 </li>
                 <li>
@@ -128,15 +130,7 @@ export default function Footer() {
                     to="/cloud-solutions"
                     className="hover:text-white transition-colors duration-300"
                   >
-                    Cloud Solutions
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/consulting"
-                    className="hover:text-white transition-colors duration-300"
-                  >
-                    IT Consulting
+                    Tailored Talent
                   </Link>
                 </li>
               </ul>
@@ -150,7 +144,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li className="flex items-center">
                   <svg
-                    className="h-5 w-5 mr-2"
+                    className="h-8 w-8 mr-2" // Increase size here (e.g., h-8 w-8)
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -168,7 +162,8 @@ export default function Footer() {
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  123 Business Street, Suite 100
+                  Unit 12, Building B0051, ROAD 0402, AL QARYAH 0604, CAPITAL
+                  GOVERNORATE
                 </li>
                 <li className="flex items-center">
                   <svg
@@ -184,7 +179,7 @@ export default function Footer() {
                       d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                     />
                   </svg>
-                  contact@example.com
+                  Contact@SoloSource.com
                 </li>
                 <li className="flex items-center">
                   <svg
@@ -200,7 +195,7 @@ export default function Footer() {
                       d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                     />
                   </svg>
-                  +1 234 567 8900
+                  +966 55 030 0850
                 </li>
               </ul>
             </div>
@@ -212,10 +207,10 @@ export default function Footer() {
           <div className="container mx-auto px-4 py-6">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="text-sm">
-                © {new Date().getFullYear()} Your Company Name. All rights
+                © {new Date().getFullYear()} Solo Source. All rights
                 reserved.
               </div>
-              <div className="flex space-x-6 mt-4 md:mt-0">
+              {/* <div className="flex space-x-6 mt-4 md:mt-0">
                 <Link
                   to="/privacy"
                   className="text-sm hover:text-white transition-colors duration-300"
@@ -234,7 +229,7 @@ export default function Footer() {
                 >
                   Cookie Policy
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
