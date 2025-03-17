@@ -68,7 +68,7 @@ const AboutUs = () => {
       </section>
 
       {/* Company Overview with Stats */}
-      <section className="py-24 bg-gray-50">
+      {/* <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto mb-16" data-aos="fade-up">
             <h2 className="text-4xl font-bold text-gray-800 mb-8 text-center">
@@ -109,7 +109,7 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Mission & Vision with Icons */}
       <section className="py-24 bg-white">
@@ -254,7 +254,7 @@ const AboutUs = () => {
       </section>
 
       {/* Team Section with Hover Effects */}
-      <section className="py-24">
+      {/* <section className="py-24">
         <div className="container mx-auto px-6">
           <h2
             className="text-4xl font-bold text-gray-800 mb-16 text-center"
@@ -288,7 +288,7 @@ const AboutUs = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

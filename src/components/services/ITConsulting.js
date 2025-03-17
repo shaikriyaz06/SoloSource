@@ -6,9 +6,19 @@ import SD from "../../assets/SD.avif";
 import AI from "../../assets/AI.avif";
 import EA from "../../assets/EA.webp";
 export default function ITConsulting() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useEffect(() => {
+  //   if (window.location.hash) {
+  //     setTimeout(() => {
+  //       const element = document.getElementById(
+  //         window.location.hash.substring(1)
+  //       );
+  //       if (element) {
+  //         element.scrollIntoView({ behavior: "smooth", block: "start" });
+  //       }
+  //     }, 100); // Small delay to allow the component to mount
+  //   }
+  // }, [window.location.hash]);
+
   const consultingServices = [
     {
       name: "Digital Transformation",

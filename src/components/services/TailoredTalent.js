@@ -118,7 +118,6 @@ export default function TailoredTalent() {
             alt="Corporate Consulting Environment"
             className="w-full h-full object-cover"
           />
-
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-800/80 to-gray-900/70"></div>
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">

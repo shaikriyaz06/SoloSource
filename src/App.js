@@ -41,7 +41,7 @@ useEffect(() => {
         <Route exact path="/contact" element={<ContactUS />} />
         <Route
           exact
-          path="/services/ItConsultings"
+          path="/services/ItConsulting"
           element={<ITConsulting />}
         />
         <Route

@@ -12,7 +12,7 @@ const Home = () => {
 
   const services = [
     {
-      link: "/services/ItConsultings",
+      link: "/services/ItConsulting",
       title: "IT Consulting & Solutions",
       description:
         "Modern web applications built with cutting-edge technologies and responsive design principles.",
@@ -53,7 +53,7 @@ const Home = () => {
           <div className="flex items-center flex-wrap">
             <div className="box basis-[85%] text-white">
               <h1 className="mt-16 text-7xl font-bold mb-4 leading-tight">
-                Your Trusted Tech Partner
+                Your Trusted <i className="italic"> Tech Partner</i>
               </h1>
               <p className="text-lg mt-4">
                 Empowering Innovation, Engineering Excellence.
@@ -192,13 +192,12 @@ const Home = () => {
                     src={service.img}
                     alt={service.title}
                     className="w-full h-72 object-cover rounded-t-xl"
-                    loading="lazy"
+                    loading="eager"
                   />
                   <div
                     className={`absolute inset-0 ${service.color} opacity-70 group-hover:opacity-60 
               transition-opacity duration-300 rounded-t-xl`}
                   />
-                  {/* Shine Effect */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-gradient-to-r from-transparent 
               via-white to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000"
@@ -220,17 +219,18 @@ const Home = () => {
                   </div>
 
                   {/* Enhanced Button */}
-                  <Link to={service.link}>
-                    <Button
-                      type="default"
-                      className={`px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 
+
+                  <Button
+                    type="default"
+                    className={`px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 
                 rounded-full transition-all duration-300 font-semibold text-white
                 hover:bg-white/20 hover:border-white/50 hover:scale-105 
                 active:scale-95 ${service.buttonColor} ${service.hoverColor}`}
-                    >
+                  >
+                    <Link to={service.link}>
                       <span className="relative z-10">Learn More</span>
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
                 </div>
               </Card>
             ))}
@@ -256,186 +256,198 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Banking & Fintech */}
-            <div
-              className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
+            <Link to="/industries/banking">
+              <div
+                className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
         hover:border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300 
-        hover:-translate-y-2"
-            >
-              <div className="text-green-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                <svg
-                  className="w-16 h-16"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+        hover:-translate-y-2 hover:cursor-pointer"
+              >
+                <div className="text-green-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <svg
+                    className="w-16 h-16"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-green-300 transition-colors duration-300">
+                  Banking & Fintech
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  Innovative financial solutions for the digital age
+                </p>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-green-300 transition-colors duration-300">
-                Banking & Fintech
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                Innovative financial solutions for the digital age
-              </p>
-            </div>
+            </Link>
 
             {/* Information Technology & TMT */}
-            <div
-              className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
+            <Link to="/industries/it">
+              <div
+                className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
         hover:border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300 
-        hover:-translate-y-2"
-            >
-              <div className="text-blue-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                <svg
-                  className="w-16 h-16"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
-                  />
-                </svg>
+        hover:-translate-y-2 hover:cursor-pointer"
+              >
+                <div className="text-blue-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <svg
+                    className="w-16 h-16"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-300 transition-colors duration-300">
+                  Information Technology & TMT
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  Cutting-edge solutions for technology and telecommunications
+                </p>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-blue-300 transition-colors duration-300">
-                Information Technology & TMT
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                Cutting-edge solutions for technology and telecommunications
-              </p>
-            </div>
+            </Link>
 
             {/* Digital Entertainment */}
-            <div
-              className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
+            <Link to="/industries/digital">
+              <div
+                className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
         hover:border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300 
-        hover:-translate-y-2"
-            >
-              <div className="text-purple-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                <svg
-                  className="w-16 h-16"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+        hover:-translate-y-2 hover:cursor-pointer"
+              >
+                <div className="text-purple-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <svg
+                    className="w-16 h-16"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors duration-300">
+                  Digital Entertainment
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  Engaging digital experiences for the entertainment industry
+                </p>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors duration-300">
-                Digital Entertainment
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                Engaging digital experiences for the entertainment industry
-              </p>
-            </div>
+            </Link>
 
             {/* Health Care & Life Sciences */}
-            <div
-              className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
+            <Link to="/industries/healthcare">
+              <div
+                className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
         hover:border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300 
-        hover:-translate-y-2"
-            >
-              <div className="text-red-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                <svg
-                  className="w-16 h-16"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  />
-                </svg>
+        hover:-translate-y-2 hover:cursor-pointer"
+              >
+                <div className="text-red-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <svg
+                    className="w-16 h-16"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-red-300 transition-colors duration-300">
+                  Health Care & Life Sciences
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  Advanced solutions for healthcare and research
+                </p>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-red-300 transition-colors duration-300">
-                Health Care & Life Sciences
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                Advanced solutions for healthcare and research
-              </p>
-            </div>
+            </Link>
 
             {/* Logistics & Supply Chain */}
-            <div
-              className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
+            <Link to="/industries/logistics">
+              <div
+                className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
         hover:border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300 
-        hover:-translate-y-2"
-            >
-              <div className="text-yellow-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                <svg
-                  className="w-16 h-16"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-                  />
-                </svg>
+        hover:-translate-y-2 hover:cursor-pointer"
+              >
+                <div className="text-yellow-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <svg
+                    className="w-16 h-16"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-yellow-300 transition-colors duration-300">
+                  Logistics & Supply Chain
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  Optimized solutions for modern supply chain management
+                </p>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-yellow-300 transition-colors duration-300">
-                Logistics & Supply Chain
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                Optimized solutions for modern supply chain management
-              </p>
-            </div>
+            </Link>
 
             {/* Education & E-learning */}
-            <div
-              className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
+            <Link to="/industries/education">
+              <div
+                className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
         hover:border-white/40 shadow-xl hover:shadow-2xl transition-all duration-300 
-        hover:-translate-y-2"
-            >
-              <div className="text-cyan-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                <svg
-                  className="w-16 h-16"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                  />
-                </svg>
+        hover:-translate-y-2 hover:cursor-pointer"
+              >
+                <div className="text-cyan-400 mb-6 transform group-hover:scale-110 transition-transform duration-300">
+                  <svg
+                    className="w-16 h-16"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors duration-300">
+                  Education & E-learning
+                </h3>
+                <p className="text-gray-300 text-lg leading-relaxed">
+                  Digital platforms for modern education delivery
+                </p>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-cyan-300 transition-colors duration-300">
-                Education & E-learning
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed">
-                Digital platforms for modern education delivery
-              </p>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -579,7 +591,10 @@ const Home = () => {
                 </button>
               </Link>
 
-              <Link to="/services/ItConsultings" className="group w-full sm:w-auto">
+              <Link
+                to="/services/ItConsulting"
+                className="group w-full sm:w-auto"
+              >
                 <button
                   className="w-full sm:w-auto px-10 py-4 rounded-full font-semibold
                            border-2 border-white text-white
