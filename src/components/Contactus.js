@@ -44,7 +44,8 @@ const ContactUs = () => {
   const contactInfo = [
     {
       title: "Visit Our Office",
-      description: "123 Business Avenue, Silicon Valley, CA 94043",
+      description:
+        "Unit 12, Building B0051, ROAD 0402, AL QARYAH 0604, CAPITAL GOVERNORATE",
       icon: (
         <svg
           className="w-6 h-6"
@@ -69,7 +70,7 @@ const ContactUs = () => {
     },
     {
       title: "Let's Talk",
-      description: "+1 (555) 123-4567",
+      description: "+966 55 030 0850",
       icon: (
         <svg
           className="w-6 h-6"
@@ -88,7 +89,7 @@ const ContactUs = () => {
     },
     {
       title: "Email Us",
-      description: "contact@yourcompany.com",
+      description: "contact@SoloSource.com",
       icon: (
         <svg
           className="w-6 h-6"
@@ -286,11 +287,18 @@ const ContactUs = () => {
               className="h-[600px] rounded-lg overflow-hidden shadow-lg"
             >
               <iframe
-                title="map"
-                className="w-full h-full"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.3325395304414!2d-122.01116148467422!3d37.33463524513264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb59127ce078f%3A0x18e1c3ce7becf1b!2sApple%20Park!5e0!3m2!1sen!2sin!4v1637309850935!5m2!1sen!2sin"
-                loading="lazy"
-              ></iframe>
+                width="100%"
+                height="600"
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+                src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Unit%2012,%20Building%20B0051,%20ROAD%200402,%20AL%20QARYAH%200604,%20CAPITAL%20GOVERNORATE+(Solo%20Source)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+              >
+                <a href="https://www.gps.ie/collections/drones/">
+                  drones ireland
+                </a>
+              </iframe>
             </div>
           </div>
         </div>

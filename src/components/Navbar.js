@@ -30,7 +30,7 @@ export default function Navbar() {
 
   const menuItemStyle = {
     padding: "12px 20px",
-    fontSize: "15px",
+    fontSize: "18px",
     fontWeight: "500",
     color: "#333",
     transition: "all 0.2s ease-in-out",
@@ -194,11 +194,11 @@ export default function Navbar() {
     return `transition px-2 py-2 rounded-md font-medium border-b-2 ${
       location.pathname === path
         ? isScrolled
-          ? "bg-teal-500 text-white border-teal-500"
-          : "bg-white text-black border-black"
+          ? "bg-teal-950 text-white "
+          : "bg-white text-black"
         : isScrolled
-        ? "text-black border-transparent hover:text-teal-500 hover:border-yellow-400 rounded-none"
-        : "text-white border-transparent hover:text-gray-300 hover:border-yellow-400 rounded-none"
+        ? "text-black border-transparent hover:text-teal-900 hover:border-teal-950 rounded-none"
+        : "text-white border-transparent hover:text-gray-300 hover:border-teal-300 rounded-none"
     }`;
   };
 
@@ -211,7 +211,7 @@ export default function Navbar() {
   return (
     <div
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white shadow-md" : "bg-transparent"
+        isScrolled ? "bg-gray-50 shadow-md" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between py-2 px-6">
@@ -250,7 +250,7 @@ export default function Navbar() {
               <span>Our Services</span>
             </div>
           </Dropdown>
-          <Dropdown
+          {/* <Dropdown
             overlay={industriesMenu}
             trigger={["hover"]}
             placement="bottom"
@@ -263,10 +263,13 @@ export default function Navbar() {
             >
               <span>Industries We Serve</span>
             </div>
-          </Dropdown>
+          </Dropdown> */}
+          <Link to="/industries " className={linkClass("/careers")}>
+            Industries We Serve
+          </Link>
 
           <Link to="/careers" className={linkClass("/careers")}>
-            Careers
+            Find A Job
           </Link>
           <Link to="/contact" className={linkClass("/contact")}>
             <PhoneOutlined className="mr-1" />
