@@ -25,7 +25,7 @@ const Home = () => {
       link: "/services/ItConsulting",
       title: "IT Consulting & Solutions",
       description:
-        "Modern web applications built with cutting-edge technologies and responsive design principles.",
+        "Empowering businesses with innovative technology and strategic guidance.Unlock your potential with tailored, future-ready solutions.",
       img: serviceCard1,
       // color: "bg-blue-900",
       buttonColor: "text-blue-900",
