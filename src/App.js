@@ -20,75 +20,54 @@ import EducationAndELearning from "./components/Industries/EducationAndELearning
 import GovernmentAndPublicSector from "./components/Industries/GovernmentAndPublicSector";
 import HealthCareAndLifeSciences from "./components/Industries/HealthCareAndLifeSciences";
 import LogisticAndSupplyChain from "./components/Industries/LogisticAndSupplyChain";
+import Industries from "./components/industries";
+import Careers from "./components/Careers";
+import ScrollToTop from "./ScrollToTop";
 
 function App() {
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-useEffect(() => {
     AOS.init({
       duration: 1000,
-    });
-    AOS.refresh();
+      once: true,
+    });    
   }, []);
 
   return (
     <div>
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/aboutus" element={<AboutUs />} />
         <Route exact path="/contact" element={<ContactUS />} />
+        <Route path="/services/ItConsulting" element={<ITConsulting />} />
         <Route
-          exact
-          path="/services/ItConsulting"
-          element={<ITConsulting />}
-        />
-        <Route
-          exact
           path="/services/BusinessConsulting"
           element={<BusinessConsulting />}
         />
+        <Route path="/services/TailoredTalent" element={<TailoredTalent />} />
+        <Route path="/industries/banking" element={<BankingAndFintech />} />
+        <Route path="/industries/it" element={<InformationTechnology />} />
+        <Route path="/industries/digital" element={<DigitalEntertainment />} />
         <Route
-          exact
-          path="/services/TailoredTalent"
-          element={<TailoredTalent />}
-        />
-        <Route
-          exact
-          path="/industries/banking"
-          element={<BankingAndFintech />}
-        />
-        <Route
-          exact
-          path="/industries/it"
-          element={<InformationTechnology />}
-        />
-        <Route
-          exact
-          path="/industries/digital"
-          element={<DigitalEntertainment />}
-        />
-        <Route
-          exact
           path="/industries/education"
           element={<EducationAndELearning />}
         />
         <Route
-          exact
           path="/industries/government"
           element={<GovernmentAndPublicSector />}
         />
         <Route
-          exact
           path="/industries/healthcare"
           element={<HealthCareAndLifeSciences />}
         />
         <Route
-          exact
           path="/industries/logistic"
           element={<LogisticAndSupplyChain />}
         />
+        <Route path="/industries" element={<Industries />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="*" element={<Home />} />
       </Routes>
       <Footer />
       <ToastContainer />

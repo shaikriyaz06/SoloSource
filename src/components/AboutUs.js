@@ -3,19 +3,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const AboutUs = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: "ease-in-out",
-      offset: 100,
-    });
-    AOS.refresh();
-  }, []);
-
   return (
     <div className="overflow-hidden">
       {/* Hero Section with Parallax Effect */}

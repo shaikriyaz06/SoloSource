@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Main_Logo from "../assets/Hero-logo1.png";
 
 export default function Footer() {
+  
   return (
     <div>
       <hr />

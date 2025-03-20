@@ -3,14 +3,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 export default function InformationTechnology() {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100,
-    });
-  }, []);
-
   const content = {
     heading: "Driving Digital Innovation Across IT & TMT Sectors",
     overview:

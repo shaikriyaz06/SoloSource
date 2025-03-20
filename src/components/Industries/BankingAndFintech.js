@@ -3,14 +3,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 export default function BankingAndFintech() {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      offset: 100,
-    });
-  }, []);
-
   const content = {
     heading: "Driving Innovation in Banking & Fintech",
     overview:

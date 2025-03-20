@@ -1,15 +1,25 @@
 import React, { useEffect, useRef } from "react";
-import serviceCard1 from "../assets/service-cards1.jpeg";
-import serviceCard2 from "../assets/service-cards2.jpeg";
-import serviceCard3 from "../assets/service-cards1.jpeg";
+import serviceCard1 from "../assets/IT-Consulting-Services-2-.jpg";
+import serviceCard2 from "../assets/business-strategy.jpeg";
+import serviceCard3 from "../assets/service-cards3.jpeg";
 import { Link } from "react-router-dom";
 import Hero_Logo from "../assets/Hero_Logo.webp";
-import { Button, Card } from "antd";
-const Home = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+import { Button, Card, Col, Row } from "antd";
+import banking from "../assets/bankingfintech.png";
+import government from "../assets/government.webp";
+import elearning from "../assets/e-learning.png";
+import logistics from "../assets/logistics.jpg";
+import IT from "../assets/IT&TMT.avif";
+import ET from "../assets/Entertainment.avif";
+import Health from "../assets/Health.avif";
+import {
+  CheckCircleOutlined,
+  ThunderboltOutlined,
+  BulbOutlined,
+  ShakeOutlined,
+} from "@ant-design/icons";
 
+const Home = () => {
   const services = [
     {
       link: "/services/ItConsulting",
@@ -42,6 +52,52 @@ const Home = () => {
       hoverColor: "hover:bg-purple-100",
     },
   ];
+  const industries = [
+    {
+      link: "/industries",
+      color: "green",
+      title: "Banking & Fintech",
+      description: "Innovative financial solutions for the digital age",
+      image: banking,
+    },
+    {
+      link: "/industries",
+      color: "blue",
+      title: "Information Technology & TMT",
+      description:
+        "Cutting-edge solutions for technology and telecommunications",
+      image: IT,
+    },
+    {
+      link: "/industries",
+      color: "purple",
+      title: "Digital Entertainment",
+      description:
+        "Engaging digital experiences for the entertainment industry",
+      image: ET,
+    },
+    {
+      link: "/industries",
+      color: "red",
+      title: "Health Care & Life Sciences",
+      description: "Advanced solutions for healthcare and research",
+      image: Health,
+    },
+    {
+      link: "/industries",
+      color: "yellow",
+      title: "Logistics & Supply Chain",
+      description: "Optimized solutions for modern supply chain management",
+      image: logistics,
+    },
+    {
+      link: "/industries",
+      color: "cyan",
+      title: "Education & E-learning",
+      description: "Digital platforms for modern education delivery",
+      image: elearning,
+    },
+  ];
   return (
     <>
       <section className="hero-section pt-[145px] pr-0 pl-[50px] pb-[70px]  h-[100vh] items-center relative bg-[rgba(4,12,23,.5)]">
@@ -64,12 +120,8 @@ const Home = () => {
       </section>
       <hr />
       <div className="px-8 rounded-sm bg-gradient-to-r from-[#00232E] via-[#00788C] to-[#01495f]">
-        <section className="py-20 bg-gradient-to-r from-[#00232E] via-[#00788C] to-[#01495f]   relative overflow-hidden">
-          {/* Background Pattern Overlay */}
-          <div className="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml,...')] pointer-events-none" />
-
+        <section className="pt-10 pb-20 bg-gradient-to-r from-[#00232E] via-[#00788C] to-[#01495f]   relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
-            {/* Enhanced Header Section */}
             <div className="text-center mb-16" data-aos="fade-up">
               <h2 className="text-5xl pb-2 font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300 animate-fade-in">
                 Our Key Services
@@ -80,169 +132,49 @@ const Home = () => {
             </div>
 
             <div className="flex gap-8 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4">
-              {/* {services.map((service, index) => (
-                <Card
-                  key={index}
-                  hoverable
-                  className="min-w-[340px] snap-center rounded-xl backdrop-blur-sm bg-white/10 border border-white/20 shadow-xl 
-            hover:shadow-2xl transition-all duration-300 ease-out transform hover:-translate-y-2 hover:border-white/30"
-                >
-                  <div className="relative group">
+              <div className="flex flex-wrap gap-6 justify-center">
+                {services.map((service, index) => (
+                  <Card
+                    key={index}
+                    data-aos="fade-right"
+                    data-aos-delay={index * 150} // Stagger effect for each card
+                    data-aos-duration="800"
+                    className="backdrop-blur-sm bg-white/10 border border-white/20 w-full md:w-[30%]"
+                  >
                     <img
+                      className="h-44 w-full object-cover"
                       src={service.img}
                       alt={service.title}
-                      className="w-full h-72 object-cover rounded-t-xl"
-                      loading="eager"
                     />
-                    <div
-                      className={`absolute inset-0 ${service.color} opacity-70 group-hover:opacity-60 
-              transition-opacity duration-300 rounded-t-xl`}
-                    />
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-gradient-to-r from-transparent 
-              via-white to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000"
-                    />
-                  </div>
-
-                  <div className="p-6 flex flex-col justify-between min-h-[220px] backdrop-blur-sm">
-                    <div>
-                      <h3
-                        className="text-2xl font-bold text-white mb-4 group-hover:scale-105 
-                transition-transform duration-300 ease-out"
-                      >
-                        {service.title}
-                      </h3>
-                      <p className="text-lg text-gray-200/90 mb-6 leading-relaxed">
-                        {service.description}
-                      </p>
-                    </div>
-
-
-                    <Button
-                      type="default"
-                      className={`px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 
-                rounded-full transition-all duration-300 font-semibold text-white
-                hover:bg-white/20 hover:border-white/50 hover:scale-105 
-                active:scale-95 ${service.buttonColor} ${service.hoverColor}`}
-                    >
+                    <div className="p-6 flex flex-col justify-between min-h-[220px] backdrop-blur-sm">
+                      <div>
+                        <h3 className="text-2xl font-bold text-white mb-4 group-hover:scale-105 transition-transform duration-300 ease-out">
+                          {service.title}
+                        </h3>
+                        <p className="text-lg text-gray-200/90 mb-6 leading-relaxed">
+                          {service.description}
+                        </p>
+                      </div>
                       <Link to={service.link}>
-                        <span className="relative z-10">Learn More</span>
+                        <Button
+                          type="default"
+                          className={`px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 
+            rounded-full transition-all duration-300 font-semibold text-white
+            hover:bg-white/20 hover:border-white/50 hover:scale-105 
+            active:scale-95 `}
+                        >
+                          <span className="relative z-10">Learn More</span>
+                        </Button>
                       </Link>
-                    </Button>
-                  </div>
-                </Card>
-              ))} */}
-              <div className="flex flex-wrap gap-6 justify-center">
-                {/* Card 1 */}
-                <Card
-                  data-aos="zoom-in"
-                  className="backdrop-blur-sm bg-white/10 border border-white/20 w-full md:w-[30%]"
-                >
-                  <img
-                    className="h-44 w-full object-cover"
-                    src={serviceCard1}
-                    alt="Service 1"
-                  />
-                  <div className="p-6 flex flex-col justify-between min-h-[220px] backdrop-blur-sm">
-                    <div>
-                      <h3 className="text-2xl font-bold text-white mb-4 group-hover:scale-105 transition-transform duration-300 ease-out">
-                        IT Consulting & Solutions
-                      </h3>
-                      <p className="text-lg text-gray-200/90 mb-6 leading-relaxed">
-                        Solo Source provides comprehensive IT solutions,
-                        designed to propel your business forward.
-                      </p>
                     </div>
-                    <Button
-                      type="default"
-                      className={`px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 
-        rounded-full transition-all duration-300 font-semibold text-white
-        hover:bg-white/20 hover:border-white/50 hover:scale-105 
-        active:scale-95 `}
-                    >
-                      <Link to="/ItConsulting">
-                        <span className="relative z-10">Learn More</span>
-                      </Link>
-                    </Button>
-                  </div>
-                </Card>
-
-                {/* Card 2 */}
-                <Card
-                  data-aos="zoom-in"
-                  className="backdrop-blur-sm bg-white/10 border border-white/20 w-full md:w-[30%]"
-                >
-                  <img
-                    className="h-44 w-full object-cover"
-                    src={serviceCard2}
-                    alt="Service 2"
-                  />
-                  <div className="p-6 flex flex-col justify-between min-h-[220px] backdrop-blur-sm">
-                    <div>
-                      <h3 className="text-2xl font-bold text-white mb-4 group-hover:scale-105 transition-transform duration-300 ease-out">
-                        Business Consulting
-                      </h3>
-                      <p className="text-lg text-gray-200/90 mb-6 leading-relaxed">
-                        Strategic business solutions and consulting services to
-                        drive your organization's growth and success.
-                        <br />
-                        <br />
-                      </p>
-                    </div>
-                    <Button
-                      type="default"
-                      className={`px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 
-        rounded-full transition-all duration-300 font-semibold text-white
-        hover:bg-white/20 hover:border-white/50 hover:scale-105 
-        active:scale-95 `}
-                    >
-                      <Link to="/CloudInfrastructure">
-                        <span className="relative z-10">Learn More</span>
-                      </Link>
-                    </Button>
-                  </div>
-                </Card>
-
-                {/* Card 3 */}
-                <Card
-                  data-aos="zoom-in"
-                  className="backdrop-blur-sm bg-white/10 border border-white/20 w-full md:w-[30%]"
-                >
-                  <img
-                    className="h-44 w-full object-cover"
-                    src={serviceCard3}
-                    alt="Service 3"
-                  />
-                  <div className="p-6 flex flex-col justify-between min-h-[220px] backdrop-blur-sm">
-                    <div>
-                      <h3 className="text-2xl font-bold text-white mb-4 group-hover:scale-105 transition-transform duration-300 ease-out">
-                        Tailored Talent Solutions
-                      </h3>
-                      <p className="text-lg text-gray-200/90 mb-6 leading-relaxed">
-                        Custom staffing and talent management solutions to build
-                        your ideal team and drive innovation.
-                      </p>
-                    </div>
-                    <Button
-                      type="default"
-                      className={`px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 
-        rounded-full transition-all duration-300 font-semibold text-white
-        hover:bg-white/20 hover:border-white/50 hover:scale-105 
-        active:scale-95 `}
-                    >
-                      <Link to="/Cybersecurity">
-                        <span className="relative z-10">Learn More</span>
-                      </Link>
-                    </Button>
-                  </div>
-                </Card>
+                  </Card>
+                ))}
               </div>
             </div>
           </div>
         </section>
-
         <hr />
-        <section className="py-20 bg-gradient-to-r from-[#00232E] via-[#00788C] to-[#01495f] relative overflow-hidden">
+        <section className="pt-10 pb-20 bg-gradient-to-r from-[#00232E] via-[#00788C] to-[#01495f] relative overflow-hidden">
           {/* Animated Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0 bg-pattern transform rotate-45 scale-150"></div>
@@ -259,11 +191,10 @@ const Home = () => {
               </p>
             </div>
 
-            <div
+            {/* <div
               className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               data-aos="zoom-in"
             >
-              {/* Banking & Fintech */}
               <Link to="/industries/banking">
                 <div
                   className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
@@ -293,8 +224,6 @@ const Home = () => {
                   </p>
                 </div>
               </Link>
-
-              {/* Information Technology & TMT */}
               <Link to="/industries/it">
                 <div
                   className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
@@ -324,8 +253,6 @@ const Home = () => {
                   </p>
                 </div>
               </Link>
-
-              {/* Digital Entertainment */}
               <Link to="/industries/digital">
                 <div
                   className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
@@ -361,8 +288,6 @@ const Home = () => {
                   </p>
                 </div>
               </Link>
-
-              {/* Health Care & Life Sciences */}
               <Link to="/industries/healthcare">
                 <div
                   className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
@@ -392,8 +317,6 @@ const Home = () => {
                   </p>
                 </div>
               </Link>
-
-              {/* Logistics & Supply Chain */}
               <Link to="/industries/logistics">
                 <div
                   className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
@@ -423,8 +346,6 @@ const Home = () => {
                   </p>
                 </div>
               </Link>
-
-              {/* Education & E-learning */}
               <Link to="/industries/education">
                 <div
                   className="group backdrop-blur-sm bg-white/10 p-8 rounded-xl border border-white/20 
@@ -454,12 +375,49 @@ const Home = () => {
                   </p>
                 </div>
               </Link>
+            </div> */}
+            <div className="max-w-7xl">
+              <Row gutter={[24, 24]} style={{ marginLeft: 0, marginRight: 0 }}>
+                {industries.map((industry, index) => (
+                  <Col xs={24} sm={12} lg={8} key={index}>
+                    <Link to={industry.link}>
+                      <Card
+                        className="custom-card shadow-lg rounded-s-3xl cursor-pointer shadow-blue-200 h-full hover:shadow-lg transition-shadow duration-300 transform perspective-1000"
+                        bordered={false}
+                        data-aos="flip-left"
+                        data-aos-duration="1000"
+                      >
+                        <div className="relative text-center transform-style-preserve-3d transition-transform duration-300 ease-in-out hover:rotate-y-180">
+                          <div className="relative">
+                            <img
+                              src={industry.image}
+                              alt={industry.title}
+                              className="w-full h-72 object-cover rounded-md transform transition-transform duration-300 ease-in-out hover:scale-110"
+                            />
+                            <div className="absolute inset-0 flex flex-col items-start justify-end bg-black bg-opacity-45 hover:bg-opacity-10 rounded-md px-4 pb-4">
+                              <p className="text-[#70eee8] font-bold text-lg mb-2 text-left">
+                                {industry.title}
+                              </p>
+                              <p className="text-white text-md font-semibold text-left">
+                                {industry.description}
+                              </p>
+                              <p className="text-[#8cd521] text-md font-bold text-left">
+                                Readmore
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </Card>
+                    </Link>
+                  </Col>
+                ))}
+              </Row>
             </div>
           </div>
         </section>
 
         <hr />
-        <section className="py-16 bg-gradient-to-r from-[#00232E] via-[#00788C] to-[#01495f] group text-white">
+        {/* <section className="pt-10 pb-20  bg-gradient-to-r from-[#00232E] via-[#00788C] to-[#01495f] group text-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12" data-aos="fade-up">
               <h2 className="text-4xl font-bold mb-4">Why Choose Us</h2>
@@ -473,7 +431,6 @@ const Home = () => {
               data-aos="fade-right"
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative"
             >
-              {/* Feature 1 */}
               <div className="text-center p-6 relative">
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-blue-600 text-xl">✓</span>
@@ -482,11 +439,10 @@ const Home = () => {
                   Expertise Without Compromise
                 </h3>
                 <p>Deep domain knowledge across IT and business landscapes.</p>
-                {/* Vertical Line */}
+
                 <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-4/5 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
               </div>
 
-              {/* Feature 2 */}
               <div className="text-center p-6 relative">
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-green-600 text-xl">⚡</span>
@@ -495,11 +451,10 @@ const Home = () => {
                   Holistic Solutions
                 </h3>
                 <p>Bridging technology, strategy, and talent under one roof.</p>
-                {/* Vertical Line */}
+
                 <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-4/5 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
               </div>
 
-              {/* Feature 3 */}
               <div className="text-center p-6 relative">
                 <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-purple-600 text-xl">💡</span>
@@ -510,11 +465,10 @@ const Home = () => {
                 <p>
                   We don't just solve problems—we future-proof your business{" "}
                 </p>
-                {/* Vertical Line */}
+
                 <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-4/5 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
               </div>
 
-              {/* Feature 4 */}
               <div className="text-center p-6 relative">
                 <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-orange-600 text-xl">🤝</span>
@@ -525,18 +479,109 @@ const Home = () => {
                 <p>Your goals drive every decision we make</p>
               </div>
 
-              {/* Horizontal Lines for Mobile/Tablet */}
               <div className="lg:hidden absolute left-4 right-4 top-1/3 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent md:hidden"></div>
               <div className="lg:hidden absolute left-4 right-4 top-2/3 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent md:hidden"></div>
 
-              {/* Horizontal Line for Tablet */}
               <div className="hidden md:block lg:hidden absolute left-4 right-4 top-1/2 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
             </div>
           </div>
-        </section>
+        </section> */}
+        <section className="pt-20 pb-28 bg-gradient-to-br from-[#00232E] via-[#00788C] to-[#01495f] text-white">
+          <div className="container mx-auto px-6">
+            {/* Header */}
+            <div className="text-center mb-16" data-aos="fade-up">
+              <h2 className="text-5xl font-extrabold mb-6 tracking-wide leading-tight">
+                Why Choose Us
+              </h2>
+              <p className="text-lg max-w-3xl mx-auto leading-relaxed opacity-90">
+                In a rapidly evolving business landscape, Solo Source stands out
+                as your strategic advantage.
+              </p>
+            </div>
 
+            {/* Features */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative">
+              {/* Feature 1 */}
+              <div
+                className="group text-center"
+                data-aos="fade-up"
+                data-aos-delay="100"
+              >
+                <div className="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:scale-110">
+                  <CheckCircleOutlined className="text-blue-400 text-5xl transition-transform duration-300 group-hover:rotate-[10deg]" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-2 transition-colors duration-300 group-hover:text-blue-300">
+                  Expertise Without Compromise
+                </h3>
+                <p className="text-base leading-relaxed opacity-80">
+                  Deep domain knowledge across IT and business landscapes.
+                </p>
+              </div>
+
+              {/* Separator */}
+              <div className="hidden lg:block absolute top-0 bottom-0 left-1/4 w-px bg-white/20" />
+
+              {/* Feature 2 */}
+              <div
+                className="group text-center"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <div className="w-16 h-16 bg-green-600/20 rounded-full flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:scale-110">
+                  <ThunderboltOutlined className="text-green-400 text-5xl transition-transform duration-300 group-hover:rotate-[10deg]" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-2 transition-colors duration-300 group-hover:text-green-300">
+                  Holistic Solutions
+                </h3>
+                <p className="text-base leading-relaxed opacity-80">
+                  Bridging technology, strategy, and talent under one roof.
+                </p>
+              </div>
+
+              {/* Separator */}
+              <div className="hidden lg:block absolute top-0 bottom-0 left-2/4 w-px bg-white/20" />
+
+              {/* Feature 3 */}
+              <div
+                className="group text-center"
+                data-aos="fade-up"
+                data-aos-delay="300"
+              >
+                <div className="w-16 h-16 bg-purple-600/20 rounded-full flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:scale-110">
+                  <BulbOutlined className="text-purple-400 text-5xl transition-transform duration-300 group-hover:rotate-[10deg]" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-2 transition-colors duration-300 group-hover:text-purple-300">
+                  Future-Ready Results
+                </h3>
+                <p className="text-base leading-relaxed opacity-80">
+                  We don’t just solve problems—we future-proof your business.
+                </p>
+              </div>
+
+              {/* Separator */}
+              <div className="hidden lg:block absolute top-0 bottom-0 left-3/4 w-px bg-white/20" />
+
+              {/* Feature 4 */}
+              <div
+                className="group text-center"
+                data-aos="fade-up"
+                data-aos-delay="400"
+              >
+                <div className="w-16 h-16 bg-orange-600/20 rounded-full flex items-center justify-center mx-auto mb-5 transition-transform duration-300 group-hover:scale-110">
+                  <ShakeOutlined className="text-orange-400 text-5xl transition-transform duration-300 group-hover:rotate-[10deg]" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-2 transition-colors duration-300 group-hover:text-orange-300">
+                  Client-Centric DNA
+                </h3>
+                <p className="text-base leading-relaxed opacity-80">
+                  Your goals drive every decision we make.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
         <hr />
-        <section className="relative py-24 overflow-hidden">
+        <section className="relative pt-10 pb-10  overflow-hidden">
           {/* Background with animated gradient */}
           <div className="absolute inset-0  bg-gradient-to-r from-[#00232E] via-[#00788C] to-[#01495f]">
             {/* Decorative elements */}
@@ -650,23 +695,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-
-          {/* Add custom animation keyframes in your CSS */}
-          <style jsx>{`
-            @keyframes gradient-x {
-              0%,
-              100% {
-                background-position: 0% 50%;
-              }
-              50% {
-                background-position: 100% 50%;
-              }
-            }
-            .animate-gradient-x {
-              background-size: 200% 200%;
-              animation: gradient-x 15s ease infinite;
-            }
-          `}</style>
         </section>
       </div>
     </>

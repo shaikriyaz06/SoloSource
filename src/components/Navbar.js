@@ -18,7 +18,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Fix hash-based navigation
+  // // ✅ Fix hash-based navigation
   useEffect(() => {
     if (location.hash) {
       const element = document.getElementById(location.hash.substring(1));
@@ -264,7 +264,7 @@ export default function Navbar() {
               <span>Industries We Serve</span>
             </div>
           </Dropdown> */}
-          <Link to="/industries " className={linkClass("/careers")}>
+          <Link to="/industries " className={linkClass("/industries")}>
             Industries We Serve
           </Link>
 
