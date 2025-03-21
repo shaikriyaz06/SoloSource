@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Main_Logo from "../assets/Hero-logo1.png";
 
 export default function Footer() {
-  
+
   return (
     <div>
       <hr />
@@ -48,7 +48,7 @@ export default function Footer() {
                   </svg>
                 </a>
                 <a
-                  href="#"
+                  href="https://www.linkedin.com/company/now-recruiting/"
                   className="hover:text-white transition-colors duration-300"
                 >
                   <span className="sr-only">LinkedIn</span>
@@ -145,7 +145,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li className="flex items-center">
                   <svg
-                    className="h-8 w-8 mr-2" // Increase size here (e.g., h-8 w-8)
+                    className="h-16 w-16 mr-2" 
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -163,8 +163,8 @@ export default function Footer() {
                       d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  Unit 12, Building B0051, ROAD 0402, AL QARYAH 0604, CAPITAL
-                  GOVERNORATE
+                  Unit 12, Building B0051, Road 0402, AL Qaryah 0604, Capital
+                  Governorate, Kingdom of Bahrain.
                 </li>
                 <li className="flex items-center">
                   <svg

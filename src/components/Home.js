@@ -107,18 +107,42 @@ const Home = () => {
         />
         <div className="home-container">
           <div className="flex items-center flex-wrap">
-            <div className="box basis-[85%] text-white" data-aos="fade-right">
-              <h1 className="mt-16 text-7xl font-bold mb-4 leading-tight">
-                Your Trusted <span className="italic"> Tech Partner</span>
+            <div
+              className="box max-w-3xl basis-[85%] text-white"
+              data-aos="fade-right"
+            >
+              <h1 className="mt-16 text-6xl mb-4 leading-tight">
+                <span className="font-bold">Your Trusted</span>{" "}
+                <span className="italic font-semibold"> Tech Partner</span>
               </h1>
               <p className="text-lg mt-4">
-                Empowering Innovation, Engineering Excellence.
+                {/* Empowering Innovation, Engineering Excellence. */}
+                {/* Pioneering Innovation, Delivering Engineering Excellence, and
+                Empowering Your Success with Cutting-Edge Solutions for a
+                Brighter Future. */}
+                Driving Innovation and Engineering Excellence. Together, we
+                create impactful solutions for a future-ready world.
               </p>
+              <div className="mt-6">
+                <div className="flex">
+                  <Link to="/contact" className=" max-md:pl-3">
+                    <button className="px-8 w-36 py-3 bg-[#DC143C] text-white rounded-md hover:bg-white hover:text-blue-600 transition-all duration-300 transform">
+                      Contact Us
+                    </button>
+                  </Link>
+                  {/* <Link to="/services">
+                    <button className="px-8 py-3 bg-blue-700 text-white rounded-md hover:bg-white hover:text-blue-600 transition-all duration-300 transform">
+                      Services
+                    </button>
+                  </Link> */}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
       <hr />
+
       <div className="px-8 rounded-sm bg-gradient-to-r from-[#00232E] via-[#00788C] to-[#01495f]">
         <section className="pt-10 pb-20 bg-gradient-to-r from-[#00232E] via-[#00788C] to-[#01495f]   relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
@@ -494,8 +518,8 @@ const Home = () => {
                 Why Choose Us
               </h2>
               <p className="text-lg max-w-3xl mx-auto leading-relaxed opacity-90">
-                In a rapidly evolving business landscape, Solo Source stands out
-                as your strategic advantage.
+                In a rapidly e volving business landscape, Solo Source stands
+                out as your strategic advantage.
               </p>
             </div>
 

@@ -44,7 +44,7 @@ const ContactUs = () => {
     {
       title: "Visit Our Office",
       description:
-        "Unit 12, Building B0051, ROAD 0402, AL QARYAH 0604, CAPITAL GOVERNORATE",
+        "Unit 12, Building B0051, Road 0402, AL Qaryah 0604, Capital Governorate, Kingdom of Bahrain.",
       icon: (
         <svg
           className="w-6 h-6"

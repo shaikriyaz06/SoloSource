@@ -273,7 +273,7 @@ export default function Navbar() {
           </Link>
           <Link to="/contact" className={linkClass("/contact")}>
             <PhoneOutlined className="mr-1" />
-            Contact Us
+            Book a call
           </Link>
         </div>
       </div>
